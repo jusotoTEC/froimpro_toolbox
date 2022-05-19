@@ -1,5 +1,9 @@
 # *"FroImPro Toolbox"*
 
+<p align="center"><img width="600" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/Logo.JPG"></p>
+
+
+
 **Autores:**
 
    1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)   
