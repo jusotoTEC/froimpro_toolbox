@@ -1,10 +1,10 @@
 # *"FroImPro Toolbox"*
 
-**Autores:**// 
+**Autores:**
 
-             1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)  //  
-             2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina)  //           
-             3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
+   1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)  //  
+   2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina)  //           
+   3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
 
 **Universidad:** Instituto Tecnológico de Costa Rica (https://www.tec.ac.cr/)
 
