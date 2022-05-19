@@ -1,6 +1,7 @@
 # *"FroImPro Toolbox"*
 
-**Autores:** 1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)  //  
+**Autores:** 
+             1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)  //  
              2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina)  //           
              3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
 
