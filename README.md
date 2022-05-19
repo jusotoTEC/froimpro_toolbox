@@ -1,4 +1,4 @@
-# *"FroImPro Toolbox"*
+# *FroImPro Toolbox*
 
 <p align="center"><img width="600" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/Logo.JPG"></p>
 
