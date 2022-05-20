@@ -32,13 +32,8 @@ Este repositorio contiene la siguiente información
 
 * La carpeta *funciones_matlab* contiene el código de MATLAB asociado al Toolbox.
    
-* La carpeta *archivo_mlbtx* contiene la archivo con extensión *.mlbtx* para instalar en MATLAB. 
-I upload repositories with equations to Gitlab because it has native support for LaTeX in .md files:
+* La carpeta *archivo_mlbtx* contiene la archivo con extensión *.mlbtx* para instalar en MATLAB. <img src="https://latex.codecogs.com/gif.latex?O_t=\text { Onset event at time bin } t " /> 
 
-```math
-SE = \frac{\sigma}{\sqrt{n}}
-```
-  
 * El documento *Manual_FroImPro_Español.pdf* contiene un manual en español del uso de cada una de las funciones del toolbox.
 
 ## Agradecimientos
