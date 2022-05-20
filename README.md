@@ -38,4 +38,4 @@ Este repositorio contiene la siguiente información
 
 ## Agradecimientos
 
-*FroImPro Toolbox* fue desarrollado por los profesores Pablo Soto-Quiros, Jeffry Chavarría-Molina y Juan José Fallas-Monge en el proyecto FroSigPro (#1440037), el cual está vinculado a la Vicerrectoría de Investigación y Extensión del Instituto Tecnológico de Costa Rica
+*FroImPro Toolbox* fue desarrollado por los profesores Pablo Soto-Quiros, Jeffry Chavarría-Molina y Juan José Fallas-Monge en el proyecto FroSigPro (#1440037) en el periodo de Enero 2019 hasta Junio 2021. El proyecto FroSigPro está vinculado a la Vicerrectoría de Investigación y Extensión del Instituto Tecnológico de Costa Rica.
