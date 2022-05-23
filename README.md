@@ -10,7 +10,7 @@
    2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina) 
    3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
 
-Los autores trabajan en la Escuela de Matemática del  Instituto Tecnológico de Costa Rica (https://www.tec.ac.cr/)
+Los autores son profesores de la Escuela de Matemática del  Instituto Tecnológico de Costa Rica (https://www.tec.ac.cr/)
 
 ## Descripción 
 
