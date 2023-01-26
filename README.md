@@ -30,9 +30,9 @@ El toolbox aborda las siguientes aplicaciones de procesamiento de imágenes y vi
   
 Este repositorio contiene la siguiente información 
 
-* La carpeta *funciones_matlab* contiene el código de MATLAB asociado al Toolbox.
-   
 * La carpeta *archivo_mlbtx* contiene la archivo con extensión *.mlbtx* para instalar en MATLAB. 
+
+* La carpeta *funciones_matlab* contiene el código de MATLAB asociado al Toolbox.
 
 * La carpeta *ejemplos* contiene ejemplos de cada una de las aplicaciones de procesamiento de imágenes y video mencionados anteriormente. 
 
