@@ -1,1 +1,1 @@
-
+Para que los ejemplos se ejecuten correctamente, debe estar instalado el toolbox FroImPro en MATLAB, o que las funciones necesarias de cada ejemplo esten en la misma carpeta del archivo donde se ejecuta el ejemplo. 
