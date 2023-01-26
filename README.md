@@ -34,6 +34,7 @@ Este repositorio contiene la siguiente información
    
 * La carpeta *archivo_mlbtx* contiene la archivo con extensión *.mlbtx* para instalar en MATLAB. 
 
+* La carpeta *ejemplos* contiene ejemplos de cada una de las aplicaciones de procesamiento de imágenes y video mencionados anteriormente. 
 
 * El documento *Manual_FroImPro_Español.pdf* contiene un manual en español del uso de cada una de las funciones del toolbox.
 
