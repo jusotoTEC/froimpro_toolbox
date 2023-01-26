@@ -1,1 +1,1 @@
-
+Descargar el archivo "imagenes_ejemplo.zip" en la misma carpeta donde se encuentre el archivo "Problema5_KSVD"
