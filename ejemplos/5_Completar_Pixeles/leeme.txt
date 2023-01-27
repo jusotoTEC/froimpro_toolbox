@@ -1,1 +1,4 @@
 Descargar el archivo "imagenes_ejemplo.zip" en la misma carpeta donde se encuentre el archivo "Problema5_KSVD"
+
+La base de datos de imágenes de este ejemplo fue descargada de la base de datos de caras de la Universidad de Georgia Tech
+El enlace donde se descargó dicha base de datos es el siguiente: http://www.anefian.com/research/face_reco.htm
