@@ -1,1 +1,4 @@
 Descargar el archivo "imagenes_ejemplo.zip" en la misma carpeta donde se encuentre el archivo "Problema2_GLRMA_ImageDenoising"
+
+La base de datos de imágenes de este ejemplo fue descargada de la base de datos de la exploración del Sistema Solar de la NASA. 
+El enlace donde se descargó dicha base de datos es el siguiente: https://solarsystem.nasa.gov/raw-images/raw-image-viewer
