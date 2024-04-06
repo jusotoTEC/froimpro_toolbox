@@ -30,11 +30,11 @@ This toolbox addresses the following applications of image and video processing:
   
 This repository contains the following information:
 
-* Folder *archivo_mlbtx* contains the file with extension .mlbtx for installation of *FroImPro Toolbox* in MATLAB. 
+* Folder *mlbtx_file* contains the file with extension .mlbtx for installation of *FroImPro Toolbox* in MATLAB. 
 
-* Folder *funciones_matlab* contains the MATLAB code for the functions of the *FroImPro Toolbox*.
+* Folder *matlab_functions* contains the MATLAB code for the functions of the *FroImPro Toolbox*.
 
-* Folder *ejemplos*  contains examples of each of the applications described above
+* Folder *examples*  contains examples of each of the applications described above
 
 * File *Manual_FroImPro_Español.pdf*  provides a manual in Spanish explaining how to use every function of the *FroImPro Toolbox*.
 
