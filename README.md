@@ -1,5 +1,5 @@
 
-<p align="center"><img width="400" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/logo.png"></p>
+<p align="center"><img width="450" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/logo.png"></p>
 
 
 
