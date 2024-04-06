@@ -20,7 +20,7 @@ The *FroImPro Toolbox* toolbox addresses the following applications of image and
   
 This repository contains the following information:
 
-* Folder *mlbtx_file* contains the file with extension .mlbtx for installation of *FroImPro Toolbox* in MATLAB. 
+* Folder *mlbtx_file* contains the file with extension *.mlbtx* for installation of *FroImPro Toolbox* in MATLAB. 
 
 * Folder *matlab_functions* contains the MATLAB code for the functions of the *FroImPro Toolbox*.
 
