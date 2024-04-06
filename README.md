@@ -6,7 +6,7 @@
 
 The *FroImPro Toolbox* is a collection of MATLAB functions that solve a wide variety of video and image processing problems. Each problem is represented as an optimization problem based on the Frobenius norm.
 
-This toolbox addresses the following applications of image and video processing:
+The *FroImPro Toolbox* toolbox addresses the following applications of image and video processing:
 
 * **Application 1:** Construction of filters to remove noise from an image.
   
