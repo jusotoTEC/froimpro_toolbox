@@ -2,15 +2,6 @@
 <p align="center"><img  src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/logo.png"></p>
 
 
-
-## Authors
-
-   1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)   
-   2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina) 
-   3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
-
-The authors are professors at the School of Mathematics of the *Instituto Tecnológico de Costa Rica* (https://www.tec.ac.cr/)
-
 ## Description 
 
 The *FroImPro Toolbox* is a collection of MATLAB functions that solve a wide variety of video and image processing problems. Each problem is represented as an optimization problem based on the Frobenius norm.
@@ -36,6 +27,17 @@ This repository contains the following information:
 * Folder *examples*  contains examples of each of the applications described above
 
 * File *Manual_FroImPro_Español.pdf*  provides a manual in Spanish explaining how to use every function of the *FroImPro Toolbox*.
+
+
+## Authors
+
+   1. Pablo Soto-Quiros        (https://www.tec.ac.cr/juan-pablo-soto-quiros)   
+   2. Jeffry Chavarría-Molina  (https://www.tec.ac.cr/jeffrey-chavarria-molina) 
+   3. Juan José Fallas-Monge   (https://www.tec.ac.cr/juan-jose-fallas-monge)
+
+The authors are professors at the School of Mathematics of the *Instituto Tecnológico de Costa Rica* (https://www.tec.ac.cr/)
+
+
 
 ## Acknowledgments
 
