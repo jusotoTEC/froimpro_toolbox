@@ -1,6 +1,6 @@
 # *FroImPro Toolbox*
 
-<p align="center"><img width="800" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/Logo.JPG"></p>
+<p align="center"><img width="800" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/Logo.png"></p>
 
 
 
