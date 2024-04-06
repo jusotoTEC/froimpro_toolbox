@@ -1,4 +1,3 @@
-# *FroImPro Toolbox*
 
 <p align="center"><img width="700" src="https://github.com/jusotoTEC/froimpro_toolbox/blob/main/img/logo.png"></p>
 
