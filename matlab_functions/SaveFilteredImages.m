@@ -1,18 +1,18 @@
 function []=SaveFilteredImages(pathNoise,pathWriteFiltered,X)
-    % Esta función recibe la dirección de una carpeta(pathNoise) donde están las
-    % imágenes a las que se desea LIMPIAR el ruido y las imágenes filtradas las
-    % escribe en la dirección pathWriteFiltered.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: SaveFilteredImages('pathNoise','pathWriteFiltered',X);
-    %
-    % Parámetro de entrada:     
-    %       pathNoise:         Ruta de la carpeta de las imágenes con ruido.
-    %       pathWriteFiltered: Ruta donde se guardarán las imágenes filtradas.
-    %       X:                 Es el filtro que se debe aplicar.
-    
+% This function receives the directory path (pathNoise) where the
+% images with noise are located, and writes the filtered images to the
+% path specified by pathWriteFiltered.
+%
+% For more information, refer to the Toolbox manual at Manual del Toolbox norma de Frobenius.
+%
+% Syntax: SaveFilteredImages('pathNoise', 'pathWriteFiltered', X);
+%
+% Input parameters:
+%       pathNoise:         Path to the folder containing noisy images.
+%       pathWriteFiltered: Path where the filtered images will be saved.
+%       X:                 The filter to be applied.
+
+
     [C,m,n]=ReadImageDataBase(pathNoise);
     [~,NumImgWithNoise]=size(C);
     for i=1:NumImgWithNoise
@@ -22,5 +22,5 @@ function []=SaveFilteredImages(pathNoise,pathWriteFiltered,X)
         imagenNIFiltradaColumna=X*ImagenNIConRuidoColumna;
         imagenNIFiltrada=reshape(imagenNIFiltradaColumna,[m n]);
         imwrite(imagenNIFiltrada,strcat(pathWriteFiltered,'\FilteredImage (',int2str(i),').jpg'));
-    end;    
+    end;
 end

@@ -1,25 +1,27 @@
-% Ejemplo de Eliminación de Ruido usando el problema GLRMA 
-% con el  toolbox FroImPro
+% Example of Noise Removal using the GLRMA problem
+% with the FroImPro toolbox
 
-% ENTRADA: La función FullRankConstrainedFilterX recibe un path de una
-% carpeta que contiene imágenes en escala de grises, todas del mismo tamaño. 
+% INPUT: The FullRankConstrainedFilterX function receives a path to a
+% folder containing grayscale images, all of the same size.
 
-% SALIDA: Matriz A cuyas columnas son vectorizaciones de las imágenes recibidas
-% y matriz X que corresponde al filtro que será utilizado para limpiar
-% ruido de otra imagen.
+% OUTPUT: Matrix A whose columns are vectorizations of the received images
+% and matrix X which corresponds to the filter that will be used to clean
+% noise from another image.
 
-% EJEMPLO PARTICULAR 
+% PARTICULAR EXAMPLE
+
 clc; clear; close all
 
-% Parte A del ejemplo: Generar el filtro X.
+% Part A of the example: Generate filter X.
 X=FullRankConstrainedFilterX('trainingData');
 
-% Parte B del ejemplo: Usar el filtro X para limpiar las imágenes almacenadas
-% en la carpeta 'NoisyImg' y en la carpeta 'Results' (creada por el
-% usuario) la función SaveFilteredImages guarda la imagen con ruido y la 
-% imagen limpiada al aplicar el filtro X.
+% Part B of the example: Use filter X to clean the images stored
+% in the 'NoisyImg' folder, and in the 'Results' folder (created by the
+% user), the SaveFilteredImages function saves the noisy image and the
+% cleaned image after applying filter X.
 SaveFilteredImages('NoisyImg','Results',X);
 
-% SOBRE EL TIEMPO DE EJECUCIÓN: El tiempo promedio de ejecutar esta función 
-% en una computaodra portátil de 8GB de memoria RAM y procesador 11th Gen 
-% Intel(R) Core(TM) i7-11850H @ 2.50GHz fue de:  14.31 segundos.
+% RUNTIME INFORMATION: The average time to execute this function
+% on a laptop with 8GB of RAM and an 11th Gen Intel(R) Core(TM) i7-11850H
+% processor @ 2.50GHz was: 14.31 seconds.
+

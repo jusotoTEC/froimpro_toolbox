@@ -1,32 +1,34 @@
 function [W,H,m,n] = ConstructionNNFM(Textpath,varargin)
-    % Esta función utiliza la función ReadImageDataBase para leer una carpeta de
-    % imágenes y construir la matriz A de dimensión mAxnA, que contiene la vectorización de las imágenes en sus
-    % columnas. Posteriormente, usa la función nnfLS para construir las matrices W y H, 
-    % las cuales se almacenan en la carpeta “Results”. 
+  
+    % This function utilizes the ReadImageDataBase function to read a folder of
+    % images and construct the matrix A of dimension mAxnA, which contains the vectorization of the images in its
+    % columns. Subsequently, it uses the nnfLS function to build the matrices W and H, 
+    % which are stored in the "Results" folder.
     %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
+    % For more information, refer to the Toolbox manual.
     %
-    % Sintaxis: [W,H,m,n] = ConstructionNNFM('Textpath')
     %
-    % Parámetro de entrada:
-    %       Textpath: Ruta de la carpeta con las imágenes.
+    % Syntax: [W,H,m,n] = ConstructionNNFM('Textpath')
     %
-    % Sintaxis alternativa: [W,H,m,n] = ConstructionNNFM(Textpath,'Extension',ext,'r',r,'IteraMax',itera,'Tol',tol)
+    % Input parameter:
+    %       Textpath: Path of the folder containing the images.
     %
-    % Sobre los parámetros opcionales:
-    %       Extension: Las extensiones que se aceptan son jpg, pgm, png, tif, bpm. 
-    %                  El valor por defecto es .jpg
-    %       r:         Es la condición para el rango. El valor por defecto es r=floor(min(mA,nA)/2)
-    %       IteraMax:  Es el número máximo de iteraciones. El valor por defecto es 2*nA         
-    %       Tol:       Es la tolerancia, su valor por defecto es 10^-6
+    % Alternative Syntax: [W,H,m,n] = ConstructionNNFM(Textpath,'Extension',ext,'r',r,'IteraMax',itera,'Tol',tol)
     %
-    % Parámetros de salida:        
-    %       W:   Es la matriz de base de las imágenes. Además, guarda un archivo W.mat en 
-    %            la carpeta "Results".
-    %       H:   Es la matriz de los coeficientes. Además, guarda un archivo H.mat en la 
-    %            carpeta "Results".
-    %       m,n: Son las dimensiones de cada una de las imágenes en la base. 
+    % About optional parameters:
+    %       Extension: The accepted extensions are jpg, pgm, png, tif, bpm. 
+    %                  The default value is .jpg.
+    %       r:         It is the condition for the rank. The default value is r=floor(min(mA,nA)/2).
+    %       IteraMax:  It is the maximum number of iterations. The default value is 2*nA.         
+    %       Tol:       It is the tolerance, its default value is 10^-6.
+    %
+    % Output parameters:        
+    %       W:   It is the basis matrix of the images. Additionally, it saves a W.mat file in 
+    %            the "Results" folder.
+    %       H:   It is the coefficient matrix. Additionally, it saves an H.mat file in the 
+    %            "Results" folder.
+    %       m,n: They are the dimensions of each of the images in the basis.
+
 
 [Lista1,Lista2]=SplitVarargin(varargin);
 [A,m,n] = ReadImageDataBase(Textpath,Lista1{:});
@@ -66,7 +68,8 @@ while j<=LongVarar
         Lista2{l2+1}=listaparametros{j+1};
         l2=l2+2;
     otherwise
-        error(strcat('El parámetro ', listaparametros{j}, 'no es reconocido'));
+        error(strcat('The parameter ', listaparametros{j}, ' is not recognized'));
+
     end
     j=j+2;
 end

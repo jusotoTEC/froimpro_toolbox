@@ -1,30 +1,29 @@
 function [A,B] = LowRankMatrixBRP(L,varargin)
-    % Esta función recibe una matriz y permite calcular una aproximación de rango bajo
-    % usando el método de proyección aleatoria bilateral. La aproximación de rango bajo "LTilde", 
-    % de rango r, la puede calcular como LTilde=A*B;
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: [A,B] = LowRankMatrixBRP(L)
-    %
-    % Parámetro de entrada:    
-    %       L:  Es la matriz que se quiere aproximar con la matriz de rango
-    %           bajo usando el método BRP. Su dimensión es mxn.
-    %
-    % Sintaxis alternativa:  [A,B]=LowRankMatrixBRP(L,'r',r,'c',c);
-    %
-    % Sobre los parámetros opcionales:
-    %       r:  Condición para el rango tal que 0<r<=rank(L). El valor por
-    %           defecto es r=floor(min(m,n)/2).
-    %       c:  Parámetro del "power scheme", se utiliza para mejorar la 
-    %           generación de las matrices de proyección bilateral. Debe 
-    %           ser entero, positivo y podría ser ajustado por el usuario. 
-    %           Su valor por defecto es c=3.
-    %
-    % Parámetros de salida:    
-    %        A: Es la matriz A=L*Qr, donde [Qr,~]=qr(Y2,0).
-    %        B: Es la matriz B=Qr', donde [Qr,~]=qr(Y2,0).
+% This function takes a matrix and allows to compute a low-rank approximation
+% using the bilateral random projection method. The low-rank approximation "LTilde", 
+% with rank r, can be computed as LTilde = A * B;
+%
+% For more information, refer to the Toolbox manual.
+%
+% Syntax: [A, B] = LowRankMatrixBRP(L)
+%
+% Input parameter:
+%       L:  The matrix to be approximated with the low-rank matrix using
+%           the BRP method. Its dimension is mxn.
+%
+% Alternative syntax:  [A, B] = LowRankMatrixBRP(L, 'r', r, 'c', c);
+%
+% About optional parameters:
+%       r:  Rank condition such that 0 < r <= rank(L). The default value
+%           is r = floor(min(m, n)/2).
+%       c:  Parameter of the "power scheme", used to enhance the 
+%           generation of bilateral projection matrices. It must be an 
+%           integer, positive, and could be adjusted by the user. 
+%           Its default value is c = 3.
+%
+% Output parameters:
+%        A: Matrix A = L * Qr, where [Qr, ~] = qr(Y2, 0).
+%        B: Matrix B = Qr', where [Qr, ~] = qr(Y2, 0).
   
     [m,n]=size(L);
     Minmn=min(m,n);
@@ -41,7 +40,7 @@ function [A,B] = LowRankMatrixBRP(L,varargin)
     L=p.Results.L;
     c=p.Results.c;
     r=p.Results.r;
-%%% Fin de la validación de argumentos
+%%% End of argument validation
     Y2 = randn(n,r);
     for i=1:c+1
         Y1 = L*Y2;

@@ -1,20 +1,21 @@
-% Ejemplo de Modelado de Fondo usando el algoritmo GoDec 
-% con el  toolbox FroImPro
+% Example of Background Modeling using the GoDec algorithm
+% with the FroImPro toolbox
 
-% ENTRADA: La función GoDecVideoFull recibe un path de un video en formato 
-% .mp4, una restricción para el rango r<=min{m,n} y 's' una constante de 
-% esparcidad. 
+% INPUT: The GoDecVideoFull function receives a path to a video in .mp4 format,
+% a constraint for the rank r<=min{m,n}, and 's' a sparsity constant.
 
-% SALIDA: Tres videos que se generan en la carpeta de trabajo. El video L
-% modelo el fondo y el video S modela los objetos en movimiento. El video
-% XLS muestra los tres videos juntos para mejor visualización.
+% OUTPUT: Three videos generated in the working directory. The L video
+% models the background and the S video models the moving objects. The
+% XLS video shows the three videos together for better visualization.
 
-% EJEMPLO PARTICULAR
+% PARTICULAR EXAMPLE
+
 clc; clear;
 r=2;
 s=2150000;
 GoDecVideoFull('video.mp4',r,s,'BRP','Scale');
 
-% SOBRE EL TIEMPO DE EJECUCIÓN: El tiempo promedio de ejecutar esta función 
-% en una computaodra portátil de 8GB de memoria RAM y procesador 11th Gen 
-% Intel(R) Core(TM) i7-11850H @ 2.50GHz fue de: 275 segundos.
+% RUNTIME INFORMATION: The average time to execute this function
+% on a laptop with 8GB of RAM and an 11th Gen Intel(R) Core(TM) i7-11850H
+% processor @ 2.50GHz was: 275 seconds.
+

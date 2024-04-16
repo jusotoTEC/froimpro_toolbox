@@ -1,35 +1,34 @@
 function [W,H,VectorError]=nnfLS(A,varargin)
-    % Esta función usa las "Multiplicative update rules" para realizar una
-    % factorización no negativa de la matriz A de dimension mAxnA, como A \approx WH.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: [W,H,VectorError] = nnfLS(A)
-    %
-    % Parámetro de entrada:    
-    %       A: Es la matriz que se desea factorizar.
-    %
-    % Sintaxis alternativa: [W,H,VectorError] = nnfLS(A,'r',r,'IteraMax',IteraMax,'Tol',Tol)
-    %
-    % Sobre los parámetros opcionales:
-    %       r:         Es la condición para el número de columnas de W. El valor por defecto es r=floor(min(mA,nA)/2)
-    %       IteraMax:  Es el número máximo de iteraciones. El valor por defecto es 2*nA         
-    %       Tol:       Es la tolerancia, su valor por defecto es 10^-6
-    %
-    % Parámetros de salida:   
-    %       W:           Primer factor, que en procesamiento de imágenes se denomina
-    %                    la base caras.
-    %       H:           Segundo factor, que en procesamiento de imágenes se demonina
-    %                    la matriz de coeficientes para las combinaciones de las caras.
-    %       VectorError: Es el vector de errores, por si el usuario desea graficarlos. 
+% This function uses the Multiplicative Update Rules to perform a
+% non-negative factorization of the matrix A of size mAxnA, such that A ? WH.
+%
+% For more information, refer to the Toolbox manual.
+%
+% Syntax: [W, H, VectorError] = nnfLS(A)
+%
+% Input parameter:    
+%       A: The matrix to be factorized.
+%
+% Alternative syntax: [W, H, VectorError] = nnfLS(A, 'r', r, 'IteraMax', IteraMax, 'Tol', Tol)
+%
+% About optional parameters:
+%       r:         Condition for the number of columns of W. The default value is r = floor(min(mA, nA)/2)
+%       IteraMax:  Maximum number of iterations. The default value is 2 * nA
+%       Tol:       Tolerance, its default value is 10^-6
+%
+% Output parameters:   
+%       W:           First factor, which in image processing is called
+%                    the basis faces.
+%       H:           Second factor, which in image processing is called
+%                    the coefficient matrix for combinations of faces.
+%       VectorError: Error vector, in case the user wants to plot them. 
 
-[mA,nA]=size(A);%Valores por defecto
+[mA,nA]=size(A);% Default values
 Min=min(mA,nA);
 r=floor(Min/2);
 IteraMax=2*nA;
 Tol=10^-6;
-%Validación de argumentos
+% Argument validation
 valid_r = @(x) isnumeric(x) && mod(x,1)==0 && (x>=1) && (x <= Min);
 valid_Itera = @(x) isnumeric(x) && mod(x,1)==0 && (x>=1);
 valid_Tol = @(x) isnumeric(x) && (x>0);
@@ -43,7 +42,7 @@ parse(p,A,varargin{:});
 r=p.Results.r;
 IteraMax=p.Results.IteraMax;
 Tol=p.Results.Tol;
-%Código de la función
+% Function code
 W=rand(mA,r); H=rand(r,nA);
 VectorError=[];
 contador=0;

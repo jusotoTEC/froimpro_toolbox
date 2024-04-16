@@ -1,22 +1,20 @@
 function [] = Matrix2Image(X,m,n,TextPath,Name)
-    % Esta función recibe una matriz X de tamaño mnxp, la cual contiene en sus columnas la
-    % información de p imágenes vectorizadas, de tamaño mxn. Al ejecutar la
-    % función se generarán las imágenes correspondientes en el directorio 'TextPath'. 
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: Matrix2Image(X,m,n,'Textpath','Name')
-    %
-    % Parámetro de entrada:
-    %       X: Matriz X de tamaño mnxp.
-    %       m,n: Son enteros positivos tales que mxn es el tamaño de cada
-    %            una de las imágenes.
-    %       Textpath: Ruta donde se guadarán las imágenes asociadas a cada columna de X.
-    %       Name: Raíz con el que se nombrarán las imágenes, seguido de un contador automático.
+% This function takes a matrix X of size mnxp, which contains in its columns
+% the information of p vectorized images of size mxn. Upon executing the
+% function, the corresponding images will be generated in the 'TextPath' directory.
+%
+% For more information, refer to the Toolbox manual.
+%
+% Syntax: Matrix2Image(X, m, n, 'TextPath', 'Name')
+%
+% Input parameters:
+%       X: Matrix X of size mnxp.
+%       m, n: Positive integers such that mxn is the size of each of the images.
+%       TextPath: Path where the images associated with each column of X will be saved.
+%       Name: Root with which the images will be named, followed by an automatic counter.
 
-isize=[m,n]; %tamaño de cada imagen
-[~,p]=size(X); %número de imágenes
+isize=[m,n]; % Size of each image
+[~,p]=size(X); % Number of images
 direccion=strcat(TextPath,'\',Name);
 if exist(TextPath)~=7
     mkdir(TextPath);
@@ -31,8 +29,8 @@ end
 end
 
 function [TextOut] = NStr(Text,N)
-%%Recibe una Cadena de caracteres en "Text" y un número natural N.
-%%Retorna una cadena donde se concatenó Text N veces.
+% Receives a character string in "Text" and a natural number N.
+% Returns a string where Text was concatenated N times.
 TextOut='';
 for i=1:N
    TextOut=strcat(TextOut,Text); 

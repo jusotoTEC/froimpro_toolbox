@@ -1,43 +1,42 @@
 function [LF,SF,Errors] = GoDec(XMatrix,r,k,Opcion,varargin)
-    % Esta función resuelve el problema: min||X-(L+S)|| donde L es de a lo sumo rango r 
-    % y S es de a lo sumo cardinalidad k. Para ello aplica el método BRP (bilateral ramdom projection)
-    % o la SVD (GODEC clásico), según se indique.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: [L,S,Errors] = GoDec(X,r,k,'Opcion')
-    %
-    % Parámetro de entrada:
-    %       X: Matriz de tamaño mnxp, construida con p imágenes de mxn pixeles.
-    %       r: Rango máximo que tendrá la matriz L.
-    %       k: Cardinalidad máxima que tendrá la matriz S.
-    %       Opcion: Valores posibles 'BRP' o 'SVD'.
-    %
-    % Sintaxis alternativa: [L,S,Errors] = GoDec(X,r,k,'Opcion','c',c,'IteraMax',IteraMax,'Tol',Tol)
-    %   
-    % Sobre los parámetros opcionales:
-    %       c:        Parámetro del "power scheme", se utiliza para mejorar la 
-    %                 generación de las matrices de proyección bilateral. Debe 
-    %                 ser entero, positivo y podría ser ajustado por el usuario. 
-    %                 Su valor por defecto es c=3.
-    %       IteraMax: Número máximo de iteraciones a realizar. El valor por
-    %                 defecto es 100.
-    %       Tol:      Tolerancia, para el método de paro, diferencia entre dos errores
-    %                 consecutivos menor que Tol. EL valor por defecto es 10^-8.
-    %
-    % Parámetros de salida:  
-    %       L:      Matriz de tamaño mnxp de a lo sumo rango r.
-    %       S:      Matriz de tamaño mnxp de a lo sumo cardinalid k
-    %       Errors: Vector con los errores generados en el proceso iterativo.
+% This function solves the problem: min||X-(L+S)|| where L has at most rank r 
+% and S has at most cardinality k. To achieve this, it applies the BRP method (bilateral random projection) 
+% or the SVD (classic GODEC), depending on what is indicated.
+%
+% For more information, refer to the Toolbox manual.
+%
+% Syntax: [L,S,Errors] = GoDec(X,r,k,'Option')
+%
+% Input parameters:
+%       X: Matrix of size mnxp, constructed with p images of mxn pixels.
+%       r: Maximum rank that matrix L will have.
+%       k: Maximum cardinality that matrix S will have.
+%       Option: Possible values 'BRP' or 'SVD'.
+%
+% Alternative Syntax: [L,S,Errors] = GoDec(X,r,k,'Option','c',c,'IteraMax',IteraMax,'Tol',Tol)
+%   
+% About optional parameters:
+%       c:        Parameter of the "power scheme", used to improve the 
+%                 generation of bilateral projection matrices. It must be 
+%                 an integer, positive, and may be adjusted by the user. 
+%                 The default value is c=3.
+%       IteraMax: Maximum number of iterations to perform. The default value is 100.
+%       Tol:      Tolerance, for the stopping criterion, difference between two consecutive errors
+%                 less than Tol. The default value is 10^-8.
+%
+% Output parameters:  
+%       L:      Matrix of size mnxp with at most rank r.
+%       S:      Matrix of size mnxp with at most cardinality k.
+%       Errors: Vector with the errors generated in the iterative process.
+
     
 ExpectedOpcions={'BRP','SVD'};
 Opcion=upper(strrep(Opcion,' ',''));
 ValidarOpcion =@(x) any(strcmp(Opcion,ExpectedOpcions));
 if ValidarOpcion(Opcion)==0
-    error(['Opción no admitida. Recuede que debe indicar BRP o SVD. Usted digitó ',Opcion]);
+    error(['Unsupported option. Remember you must indicate BRP or SVD. You entered ',Opcion]);
 end
-%Fin de la validación de Opcion
+% End of the Option validation
 
 defaultC=3;
 defaultIteraMax=100;
@@ -70,7 +69,7 @@ Tol=p.Results.Tol;
 IteraMax=p.Results.IteraMax;
 
 
-%%% Fin de la validación de argumentos
+%%% End of the argument validation
 
 
 Bandera=false;
@@ -92,12 +91,12 @@ if Opcion=='BRP'
        [A,B]=LowRankMatrixBRPSinValidacion(XMatrix-S,r,c);
        L=A*B;
     
-        T=XMatrix-L;                  %Inicia la actualización de S
+        T=XMatrix-L;                 % Starts the update of S
         [~,idx]=sort(abs(T(:)),'descend');
         S=zeros(m,n);
         S(idx(1:k))=T(idx(1:k));                    
     
-                            %Inicia el cálculo del nuevo error
+                            % Starts the calculation of the new error
         T=XMatrix-L-S;
         ErrorF=(norm(T,'fro'))^2/NormaX2;
         T(idx(1:k))=0;
@@ -108,18 +107,18 @@ if Opcion=='BRP'
 elseif Opcion=='SVD'
     while ((ValorError>Tol) && (t<IteraMax))
         t=t+1;
-        [U,Sigma,VT]=svd(XMatrix-S);    %funciona pero esto lo hace muy caro.
+        [U,Sigma,VT]=svd(XMatrix-S);   
         U=U(:,1:r);
         VT=VT(:,1:r);    
         Sigma=Sigma(1:r,1:r);
         L=U*Sigma*VT.';
     
-        T=XMatrix-L;                  %Inicia la actualización de S
+        T=XMatrix-L;                  % Starts the update of S
         [~,idx]=sort(abs(T(:)),'descend');
         S=zeros(m,n);
         S(idx(1:k))=T(idx(1:k));                    
     
-                            %Inicia el cálculo del nuevo error
+                            % Starts the calculation of the new error
         T=XMatrix-L-S;
         ErrorF=(norm(T,'fro'))^2/NormaX2;
         T(idx(1:k))=0;
@@ -141,21 +140,20 @@ end
 
 
 function [A,B] = LowRankMatrixBRPSinValidacion(L,r,c)
-%%% Esta función recibe una matriz y calcula una aproximación de rango bajo
-%%% usando el método de proyección aleatoria bilateral.
-%%% Parámetros:
-        %%% L:  Es la matriz que se quiere aproximar con la matriz de rango
-        %%%     bajo usando el método BRP. Su dimensión es mxn.
-        %%% r:  Condición para el rango tal que 0<r<=rank(L). El valor por
-        %%%     defecto se toma como floor(min(m,n)/2);
-        %%% c:  Parámetro del "power scheme", se utiliza para mejorar la 
-        %%%     generación de las matrices de proyección bilateral. Debe 
-        %%%     ser entero, positivo y podría ser ajustado por el usuario. 
-        %%%     Su valor por defecto es 3.
-%%% Sobre los argumentos que retorna:
-        %%%     A: Dado que [Qr,~]=qr(Y2,0), entonces A=L*Qr;
-        %%%     B: Dado que [Qr,~]=qr(Y2,0), entonces B=Qr';
-%%% Nota: La aproximación de rango bajo LTilde, de rango r, la puede calcular como
+%%% This function takes a matrix and computes a low-rank approximation
+%%% using the bilateral random projection method.
+%%% Parameters:
+        %%% L:  It is the matrix to be approximated with the low-rank matrix
+        %%%     using the BRP method. Its dimension is mxn.
+        %%% r:  Rank condition such that 0<r<=rank(L). The default value is taken as floor(min(m,n)/2).
+        %%% c:  Parameter of the "power scheme", used to improve the 
+        %%%     generation of bilateral projection matrices. It must be 
+        %%%     an integer, positive, and may be adjusted by the user. 
+        %%%     The default value is 3.
+%%% About the returned arguments:
+        %%%     A: Since [Qr,~]=qr(Y2,0), then A=L*Qr;
+        %%%     B: Since [Qr,~]=qr(Y2,0), then B=Qr';
+%%% Note: The low-rank approximation LTilde, of rank r, can be computed as
 %%%       LTilde=A*B;
  
     [~,n]=size(L);

@@ -1,72 +1,72 @@
 function [C,A,m,n]=NoiseFunction(Textpath,varargin)
-    % Esta función lee una carpeta con imágenes con la función "ReadDataBase" y calcula la matriz A 
-    % que contiene de la imágenes originales en sus columnas, y C que es la matriz con las imágenes en 
-    % en sus columnas, pero con ruido.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: [C,A,m,n]=NoiseFunction('Textpath')
-    %    
-    % Parámetro de entrada: 
-    %       Textpath: Ruta de la carpeta con las imágenes.    
-    %
-    % Sintaxis alternativa:
-    %       Opción 1: [C,A,m,n]=NoiseFunction('Textpath','NoiseOption','gaussian','sigmagauss',n_0,'meangauss',n_1);
-    %       Opción 2: [C,A,m,n]=NoiseFunction('Textpath','NoiseOption','s&p','d',n_0);
-    %       Opción 3: [C,A,m,n]=NoiseFunction('Textpath','NoiseOption','speckle','sigmaspeckle',n_0);
-    %    
-    % Sobre los parámetros opcionales:
-    %
-    %       NoiseOption:  Es el tipo de ruido, teniendo las opciones 'speckle',
-    %                     's&p','gaussian', donde 's&p' significa "salt and
-    %                     pepper". El valor por defecto es NoiseOption=gaussian.
-    %       sigmagauss:   Varianza para el ruido gaussiano. El valor por defecto es sigmagauss=0.01
-    %       meangauss:    Media para el ruido gaussiano. El valor por defecto es meangauss=0
-    %       sigmaspeckle: Varianza para el ruido speckle. El valor por defecto es sigmaspeckle=0.05                  
-    %       d:            Densidad del ruido para s&p. El valor por defecto es d=0.05
-    %
-    % Parámetros de salida:       
-    %       A:   Matriz que contiene las imágenes originales, organizadas en columnas. 
-    %       C:   Matriz que contiene las imágenes con ruido, organizadas en columnas. 
-    %       m,n: Son las dimensiones de cada una de las imágenes en la base.    
-    
-    [A,m,n]=ReadImageDataBase(Textpath); %%Lee la base de imágenes
+% This function reads a folder with images using the "ReadDataBase" function and calculates the matrix A
+% containing the original images in its columns, and C, which is the matrix with the images but with noise
+% in its columns.
+%
+% For more information, refer to the Toolbox manual.
+%
+% Syntax: [C, A, m, n] = NoiseFunction('TextPath')
+%
+% Input parameter:
+%       TextPath: Path of the folder with the images.
+%
+% Alternative syntax:
+%       Option 1: [C, A, m, n] = NoiseFunction('TextPath', 'NoiseOption', 'gaussian', 'sigmagauss', n_0, 'meangauss', n_1);
+%       Option 2: [C, A, m, n] = NoiseFunction('TextPath', 'NoiseOption', 's&p', 'd', n_0);
+%       Option 3: [C, A, m, n] = NoiseFunction('TextPath', 'NoiseOption', 'speckle', 'sigmaspeckle', n_0);
+%
+% About optional parameters:
+%
+%       NoiseOption:  Type of noise, with options 'speckle',
+%                     's&p', 'gaussian', where 's&p' stands for "salt and
+%                     pepper". The default value is NoiseOption = gaussian.
+%       sigmagauss:   Variance for Gaussian noise. The default value is sigmagauss = 0.01.
+%       meangauss:    Mean for Gaussian noise. The default value is meangauss = 0.
+%       sigmaspeckle: Variance for speckle noise. The default value is sigmaspeckle = 0.05.
+%       d:            Density of noise for s&p. The default value is d = 0.05.
+%
+% Output parameters:
+%       A:   Matrix containing the original images, organized in columns.
+%       C:   Matrix containing the images with noise, organized in columns.
+%       m, n: Dimensions of each of the images in the database.
+
+    [A,m,n]=ReadImageDataBase(Textpath); % Read the image database.
     [~,num_img]=size(A);
     %%%%%%%%%%%%%%%%%%%%%%%
-    %%%%%%%%%%%%%%Acá cargo los valores por default
+    %%%%%%%%%%%%%% Here I load the default values
     NoiseOption='gaussian';
     sigmagauss=0.01;
     meangauss=0;
     d=0.05;
     sigmaspeckle=0.05;
-    %%%%%%%%%%%%%%Terminé de cargar los valores por default
-    expectedNoises = {'speckle','s&p','gaussian'}; %Posibles valores para la variable "NoiseOption"
-    %%%%%%%%%%% Uso el inputParser para validar argumentos y asignar valores por defecto. 
+   %%%%%%%%%%%%%% Default values loaded successfully.
+    expectedNoises = {'speckle','s&p','gaussian'};% Possible values for the variable "NoiseOption"
+    %%%%%%%%%%% I use the inputParser to validate arguments and assign default values.
     p = inputParser;
     validScalar1 = @(x) isnumeric(x) && isscalar(x) && (x > 0);
     validScalar2 = @(x) isnumeric(x) && isscalar(x) && (x >= 0);
-    addRequired(p,'Textpath'); %% Parámetro obligatorio. Los de abajo todos son opcionales.
-    addParameter(p,'NoiseOption',NoiseOption,@(x) any(strcmp(lower(strrep(x,' ','')),expectedNoises))); 
-                    %%%%  Valida si el parámetro 'NoiseOption' existe.
-                    %%%%  Si no existe, le asigna el valor por defecto.
-                    %%%%  Si sí existe, el objeto "p" contiene el valor ingresado por el usuario.
-                    %%%%  Se accesa con p.Results.NoiseOption         
+    addRequired(p,'Textpath'); %% Mandatory parameter. The ones below are all optional.
+    addParameter(p,'NoiseOption',NoiseOption,@(x) any(strcmp(lower(strrep(x,' ','')),expectedNoises)));
+                    %%%% Validates if the parameter 'NoiseOption' exists.
+                    %%%% If it doesn't exist, it assigns the default value.
+                    %%%% If it does exist, the object "p" contains the value entered by the user.
+                    %%%% It is accessed with p.Results.NoiseOption
+
     addParameter(p,'sigmagauss',sigmagauss,validScalar1);
     addParameter(p,'meangauss',meangauss,validScalar2);
     addParameter(p,'d',d,validScalar1);
     addParameter(p,'sigmaspeckle',sigmaspeckle,validScalar1);
-    parse(p,Textpath,varargin{:});   
-    %%%%%%%%%%%%%%%%% Cierro el inputParser
-    NoiseOption=p.Results.NoiseOption; %Cargo el tipo de ruido
+    parse(p,Textpath,varargin{:});
+    %%%%%%%%%%%%%%%%% Closing the inputParser
+    NoiseOption=p.Results.NoiseOption; % Load the type of noise
     NoiseOption=lower(strrep(NoiseOption,' ',''));
-    if strcmp(NoiseOption,'s&p') NoiseOption='salt & pepper'; end; %Simplemente le cambio el nombre
-    %%%%% De acá en adelante cargo los demás parámetros, a partir de los atributos del objeto p
+    if strcmp(NoiseOption,'s&p') NoiseOption='salt & pepper'; end; % I simply change its name
+    %%%%% From here on, I load the other parameters, starting from the attributes of the object p
     sigmagauss=p.Results.sigmagauss;
     meangauss=p.Results.meangauss;
     d=p.Results.d;
     sigmaspeckle=p.Results.sigmaspeckle;
-    %%%% Cierro la carga de variables    
+    %%%% Close the variable loading
     %%%%%%%%%%%%%%%%%%%%%%%%%%%
     N=zeros(m,n,num_img);
     C=zeros(m*n,num_img);
@@ -74,22 +74,22 @@ function [C,A,m,n]=NoiseFunction(Textpath,varargin)
             for i=1:num_img
                 ImageMatrix=reshape(A(:,i),m,n);
                 N=imnoise(ImageMatrix,NoiseOption,sigmaspeckle);
-                C(:,i)=reshape(N,[m*n 1]); %Imagenes con ruido en las columnas 
+                C(:,i)=reshape(N,[m*n 1]); % Images with noise in the columns
             end;
     elseif strcmp(NoiseOption,'salt & pepper')
-            for i=1:num_img  
+            for i=1:num_img
                 ImageMatrix=reshape(A(:,i),m,n);
                 N=imnoise(ImageMatrix,NoiseOption,d);
-                C(:,i)=reshape(N,[m*n 1]); %Imagenes con ruido en las columnas 
+                C(:,i)=reshape(N,[m*n 1]); % Images with noise in the columns
             end;
-    elseif strcmp(NoiseOption,'gaussian') 
-            for i=1:num_img    
+    elseif strcmp(NoiseOption,'gaussian')
+            for i=1:num_img
                 ImageMatrix=reshape(A(:,i),m,n);
                 N=imnoise(ImageMatrix,NoiseOption,meangauss,sigmagauss);
-                C(:,i)=reshape(N,[m*n 1]); %Imagenes con ruido en las columnas 
-            end; 
+                C(:,i)=reshape(N,[m*n 1]); % Images with noise in the columns
+            end;
     else
         error('The valid options for the parameter NoiseOption are gaussian, s&p and speckle.');
-    end;  
-     
+    end;
+
 end

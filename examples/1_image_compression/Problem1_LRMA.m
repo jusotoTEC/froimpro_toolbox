@@ -1,19 +1,20 @@
-% Ejemplo de Compresión de Imágenes usando el problema LRMA 
-% con el  toolbox FroImPro
+% Example of Image Compression using the LRMA problem
+% with the FroImPro toolbox
 
-% ENTRADA: La función ImageCompression recibe un path de una imagen, un 
-% radio de comprensión y una etiqueta 'BRP' o 'SVD', para que la función 
-% se ejecute con la SVD o con el método MBRP.
+% INPUT: The ImageCompression function receives a path to an image, a
+% compression ratio, and a label 'BRP' or 'SVD', for the function
+% to run with SVD or with the MBRP method.
 
-% SALIDA: La función crea una carpeta 'Results' que contiene la imagen
-% recibida en escala de grises y su representación matricial almacenada en
-% el archivo L.txt, la imagen comprimida, las matrices A y B (corresponden 
-% a D y C en el artículo, respectivamente) almacenadas en archivos de texto. 
+% OUTPUT: The function creates a 'Results' folder containing the image
+% received in grayscale and its matrix representation stored in
+% the file L.txt, the compressed image, matrices A and B (corresponding
+% to D and C in the article, respectively) stored in text files.
 
-% EJEMPLO PARTICULAR
+% PARTICULAR EXAMPLE
+
 clc; clear;
 ImageCompression('volcan.jpg',0.174,'BRP');
 
-% SOBRE EL TIEMPO DE EJECUCIÓN: El tiempo promedio de ejecutar esta función 
-% en una computaodra portátil de 8GB de memoria RAM y procesador 11th Gen 
-% Intel(R) Core(TM) i7-11850H @ 2.50GHz fue de: 1.25 segundos.
+% RUNTIME INFORMATION: The average time to execute this function
+% on a laptop with 8GB of RAM and an 11th Gen Intel(R) Core(TM) i7-11850H
+% processor @ 2.50GHz was: 1.25 seconds.

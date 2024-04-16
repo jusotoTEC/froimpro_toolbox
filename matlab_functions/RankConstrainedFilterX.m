@@ -1,18 +1,19 @@
 function [X]=RankConstrainedFilterX(A,C,k)
-    % Encuentra la matriz X de rango reducido que minimiza ||A-XC||_fr
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: X=RankConstrainedFilterX(A,C,k)
-    %
-    % Parámetro de entrada:
-    %       A:   Matriz que contiene las imágenes originales, organizadas en columnas. 
-    %       C:   Matriz que contiene las imágenes con ruido, organizadas en columnas. 
-    %       k:   Es la restricción para el rango. Por defecto, se toma k=min(mA,nA)
-    %
-    % Parámetros de salida:        
-    %       X: Matriz que corresponde al filtro construido.
+% Find the reduced rank matrix X that minimizes ||A-XC||_fr
+%
+% For more information, see the Toolbox manual at <a href="matlab:
+% web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')">Frobenius Norm Toolbox Manual</a>.
+%
+% Syntax: X=RankConstrainedFilterX(A,C,k)
+%
+% Input:
+%       A:   Matrix containing the original images, organized in columns.
+%       C:   Matrix containing the noisy images, organized in columns.
+%       k:   Rank constraint. By default, k=min(mA,nA)
+%
+% Output:
+%       X: Matrix corresponding to the constructed filter.
+
 
     [mA,nA]=size(A);
     pinvC=pinv(C);

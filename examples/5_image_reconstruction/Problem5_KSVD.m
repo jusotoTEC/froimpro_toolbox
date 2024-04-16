@@ -1,21 +1,22 @@
-% Ejemplo de Extracción de Características de caras usando 
-% el problema NNMF con el  toolbox FroImPro
+% Example of Face Feature Extraction using the NNMF problem
+% with the FroImPro toolbox
 
+% INPUT: The ConstructionNNFM function receives a path to a folder with grayscale
+% images, all of the same size, a constraint for the rank r<=min{m,n},
+% and a sparsity constant c.
 
-% ENTRADA: La función ConstructionNNFM recibe un path de una carpeta con imágenes en
-% escala de grises, del mismo tamaño una restricción para el rango
-% r<=min{m,n} y una constante c de esparcidad.
+% OUTPUT: Matrices X1 and X2, where A\approx X1*X2 and A is the original
+% matrix, based on the KSVD algorithm.
 
-% SALIDA: Matrices X1 y X2, donde A\approx X1*X2 y A es la matriz original,
-% basado en el algoritmo KSVD
+% PARTICULAR EXAMPLE
 
-% EJEMPLO PARTICULAR
 clc; clear;
-r=15; c=2; 
+r=15; c=2;
 [X1,X2,Err]=ksvd('dataset',r,c);
 
-% RECONTRUCCIÓN IMAGEN CON PIXELES PERDIDOS
-Img_Rec=clean_ksvd('img_pix.pgm',X1); 
+% IMAGE RECONSTRUCTION WITH MISSING PIXELS
+
+Img_Rec=clean_ksvd('img_pix.pgm',X1);
 
 
 

@@ -1,30 +1,30 @@
 function [] = ReconstructionExternalFacesDirectory(Textpath,W,varargin)
-    % Esta función recibe una ruta de un directorio de imágenes y usa la
-    % matriz base W para reconstruir las imágenes y así evaluar la calidad
-    % de la base de caras W. Esta función usa la función ReconstructionExternalFace,
-    % la cual guardará las nuevas imágenes en formato jpg, en el directorio
-    % "Results" dentro de la carpeta de trabajo. Si no existe, la crea automáticamente.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: ReconstructionExternalFacesDirectory('Textpath',W)
-    %
-    % Parámetro de entrada:    
-    %       Textpath:   Ruta de la carpeta de imágenes que desea reconstruir.       
-    %       W:          Es la matriz que representa la base de caras. Esta matriz se 
-    %                   obtiene al ejecutar la función ConstructionNNFM.
-    %
-    % Sintaxis alternativa: 
-    %       ReconstructionExternalFacesDirectory('Textpath',W,'Extension','ext','NameOutput','name')   
-    %
-    % Sobre los parámetros opcionales:
-    %       Extension: Las extensiones que se aceptan son jpg, pgm, png, tif, bpm. 
-    %                  El valor por defecto es .jpg  
-    %       NameOutput: Es el nombre que se utilizará para guardar las imágenes nuevas. 
-    %                   El valor por defecto es NameOutput='Reconstruted'.    
- 
-NameOutput='Reconstruted';% Validaciones
+% This function receives a directory path containing images and uses the
+% base matrix W to reconstruct the images and evaluate the quality
+% of the face base W. This function uses the ReconstructionExternalFace function,
+% which will save the new images in jpg format, in the
+% "Results" directory within the working folder. If it doesn't exist, it automatically creates it.
+%
+% For more information, see the Toolbox manual.
+%
+% Syntax: ReconstructionExternalFacesDirectory('Textpath',W)
+%
+% Input:
+%       Textpath:   Path of the image directory you want to reconstruct.
+%       W:          Matrix representing the face base. This matrix is
+%                   obtained by executing the ConstructionNNFM function.
+%
+% Alternative syntax:
+%       ReconstructionExternalFacesDirectory('Textpath',W,'Extension','ext','NameOutput','name')
+%
+% About optional parameters:
+%       Extension: Accepted extensions are jpg, pgm, png, tif, bmp.
+%                  The default value is .jpg
+%       NameOutput: Name to be used for saving the new images.
+%                   The default value is NameOutput='Reconstruted'.
+
+
+NameOutput='Reconstruted';% Validations
 Extension='.jpg';
 expectedExtensions = {'.jpg','.pgm','.bmp','.png','.tif'};
 ValidMatrix = @(x) ismatrix(x) && isnumeric(x);
@@ -37,21 +37,22 @@ parse(p,Textpath,W,varargin{:});
 Extension=p.Results.Extension;
 NameOutput=p.Results.NameOutput;
 %%%%%
-NameFilesVector=ls(Textpath); %Vector con los nombres completos de todos los archivos en la carpeta
-i=0; %%%Controla el número de archivos válidos en la carpeta, dado que en la carpeta
-     %%% podrían haber archivos del sistema, los cuales hay que ignorar.
+NameFilesVector=ls(Textpath); % Vector with the full names of all files in the folder
+i=0; %%% Controls the number of valid files in the folder, as there might be
+%%% system files in the folder which need to be ignored.
+
  for j=1:size(NameFilesVector,1)
-   Filej=NameFilesVector(j,:); %Toma el archivo j de la carpeta
-   [~,~,Fileextension]=fileparts(Filej); %Lee la extenxión del archivo
-   %%% En el siguiente if valida el archivo y si la extensión coincide
+   Filej=NameFilesVector(j,:); % Take the j-th file from the folder
+   [~,~,Fileextension]=fileparts(Filej); % Read the file extension
+   %%% In the following if statement, validate the file and if the extension matches
    if (and(~isdir(fullfile(Textpath,Filej)),or(strcmpi(strtrim(Fileextension),Extension),isempty(Extension))))
-       i=i+1; %% Archivo válido, incrementa el contador de imágenes.
-       direccion=fullfile(Textpath,Filej); %% Carga la dirección completa del archivo.
+       i=i+1; %% Valid file, increment the image counter.
+       direccion=fullfile(Textpath,Filej); %% Load the full path of the file.
        ReconstructionExternalFace(direccion,W,strcat(NameOutput,int2str(i)));
    end
  end
  num_img=i;
- if i==0 
+ if i==0
      error(strcat('There are not images in your data base with the extension ',Extension));
  end
  end

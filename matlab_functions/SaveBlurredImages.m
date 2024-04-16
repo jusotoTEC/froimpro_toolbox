@@ -1,75 +1,75 @@
 function []=SaveBlurredImages(pathOriginal,pathWriteNoise,varargin)
-    % Esta función recibe la dirección de una carpeta(pathOriginal) donde están las
-    % imágenes a las que se desea aplicar ruido y las imágenes con ruido las
-    % escribe en la dirección pathWriteNoise.
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %
-    % Sintaxis: SaveBlurredImages('pathOriginal','pathWriteNoise');
-    %   
-    % Parámetro de entrada:  
-    %       pathOriginal: Dirección de las imágenes a las que se les aplicará ruido.
-    %       pathWriteNoise: Dirección donde se guardarán las imágenes con ruido.
-    %
-    % Sintaxis alternativa:
-    %       Opción 1: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption',...
-    %                     'gaussian','sigmagauss',n_0,'meangauss',n_1);
-    %       Opción 2: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption','s&p','d',n_0);
-    %       Opción 3: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption','speckle','sigmaspeckle',n_0);
-    %
-    % Sobre los parámetros opcionales:
-    %
-    %       NoiseOption:  Es el tipo de ruido, teniendo las opciones 'speckle',
-    %                     's&p','gaussian', donde 's&p' significa "salt and
-    %                     pepper". El valor por defecto es NoiseOption=gaussian.
-    %       sigmagauss:   Varianza para el ruido gaussiano. El valor por defecto es sigmagauss=0.01
-    %       meangauss:    Media para el ruido gaussiano. El valor por defecto es meangauss=0
-    %       sigmaspeckle: Varianza para el ruido speckle. El valor por defecto es sigmaspeckle=0.05                  
-    %       d:            Densidad del ruido para s&p. El valor por defecto es d=0.05
-    %
+% This function receives the directory of a folder (pathOriginal) where the
+% images to which noise will be applied are located, and writes the noisy images to the
+% directory pathWriteNoise.
+%
+% For more information, see the Toolbox manual at <a href="matlab:
+% web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')">Frobenius Norm Toolbox Manual</a>.
+%
+% Syntax: SaveBlurredImages('pathOriginal','pathWriteNoise');
+%
+% Input:
+%       pathOriginal: Directory of the images to which noise will be applied.
+%       pathWriteNoise: Directory where the noisy images will be saved.
+%
+% Alternative syntax:
+%       Option 1: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption',...
+%                     'gaussian','sigmagauss',n_0,'meangauss',n_1);
+%       Option 2: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption','s&p','d',n_0);
+%       Option 3: SaveBlurredImages('pathOriginal','pathWriteNoise','NoiseOption','speckle','sigmaspeckle',n_0);
+%
+% About optional parameters:
+%
+%       NoiseOption:  Type of noise, with options 'speckle',
+%                     's&p','gaussian', where 's&p' stands for "salt and
+%                     pepper". The default value is NoiseOption=gaussian.
+%       sigmagauss:   Variance for Gaussian noise. The default value is sigmagauss=0.01
+%       meangauss:    Mean for Gaussian noise. The default value is meangauss=0
+%       sigmaspeckle: Variance for speckle noise. The default value is sigmaspeckle=0.05
+%       d:            Noise density for s&p. The default value is d=0.05
+
 
     NoiseOption='gaussian';
     sigmagauss=0.01;
     meangauss=0;
     d=0.05;
     sigmaspeckle=0.05;
-    %%%%%%%%%%%%%%Terminé de cargar los valores por default
-    expectedNoises = {'speckle','s&p','gaussian'}; %Posibles valores para la variable "NoiseOption"
-    %%%%%%%%%%% Uso el inputParser para validar argumentos y asignar valores por defecto. 
+    %%%%%%%%%%%%%%% Default values loaded successfully
+    expectedNoises = {'speckle','s&p','gaussian'}; % Possible values for the variable "NoiseOption"
+    %%%%%%%%%%% I use the inputParser to validate arguments and assign default values.
     p = inputParser;
     validScalar1 = @(x) isnumeric(x) && isscalar(x) && (x > 0);
     validScalar2 = @(x) isnumeric(x) && isscalar(x) && (x >= 0);
-    addRequired(p,'pathOriginal'); %% Parámetro obligatorio.
-    addRequired(p,'pathWriteNoise'); %% Parámetro obligatorio.
-    addParameter(p,'NoiseOption',NoiseOption,@(x) any(strcmp(lower(strrep(x,' ','')),expectedNoises))); 
-                    %%%%  Valida si el parámetro 'NoiseOption' existe.
-                    %%%%  Si no existe, le asigna el valor por defecto.
-                    %%%%  Si sí existe, el objeto "p" contiene el valor ingresado por el usuario.
-                    %%%%  Se accesa con p.Results.NoiseOption         
+    addRequired(p,'pathOriginal'); %% Mandatory parameter.
+    addRequired(p,'pathWriteNoise'); %% Mandatory parameter.
+    addParameter(p,'NoiseOption',NoiseOption,@(x) any(strcmp(lower(strrep(x,' ','')),expectedNoises)));
+                    %%%%  Validates if the parameter 'NoiseOption' exists.
+                    %%%%  If it doesn't exist, it assigns the default value.
+                    %%%%  If it does exist, the object "p" contains the value entered by the user.
+                    %%%%  It is accessed with p.Results.NoiseOption
     addParameter(p,'sigmagauss',sigmagauss,validScalar1);
     addParameter(p,'meangauss',meangauss,validScalar2);
     addParameter(p,'d',d,validScalar1);
     addParameter(p,'sigmaspeckle',sigmaspeckle,validScalar1);
-    parse(p,pathOriginal,pathWriteNoise,varargin{:});   
-    %%%%%%%%%%%%%%%%% Cierro el inputParser
-    NoiseOption=p.Results.NoiseOption; %Cargo el tipo de ruido
-    NoiseOption=lower(strrep(NoiseOption,' ','')); %Elimino espacios y paso a minúscula.
-    %%%%% De acá en adelante cargo los demás parámetros, a partir de los atributos del objeto p
+    parse(p,pathOriginal,pathWriteNoise,varargin{:});
+   %%%%%%%%%%%%%%%%% Closing the inputParser
+    NoiseOption=p.Results.NoiseOption; % Load the type of noise
+    NoiseOption=lower(strrep(NoiseOption,' ','')); % Remove spaces and convert to lowercase.
+    %%%%% From here on, I load the other parameters, starting from the attributes of the object p
     sigmagauss=p.Results.sigmagauss;
     meangauss=p.Results.meangauss;
     d=p.Results.d;
     sigmaspeckle=p.Results.sigmaspeckle;
-    %%%% Cierro la carga de variables    
+    %%%% Closing the variable loading
     %%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %%% Ahora creo la matriz con ruido. C tiene una columna para cada
-    %%% imagen con ruido. 
-    [C,~,m,n]=NoiseFunction(pathOriginal,'NoiseOption',NoiseOption,'sigmagauss',sigmagauss,'meangauss',meangauss,'d',d,'sigmaspeckle',sigmaspeckle); 
+    %%% Now I create the noisy matrix. C has one column for each
+    %%% noisy image.
+    [C,~,m,n]=NoiseFunction(pathOriginal,'NoiseOption',NoiseOption,'sigmagauss',sigmagauss,'meangauss',meangauss,'d',d,'sigmaspeckle',sigmaspeckle);
     [~,num_img]=size(C);
-    %%%% Parte final, escribo las imágenes con ruido
+    %%%% Final part, I write the noisy images
     for i=1:num_img
-        ImagenNIConRuidoColumna=C(:,i); % Leo la columna i de C
-        ImagenNIConRuido=reshape(ImagenNIConRuidoColumna,[m n]); %La convierto en matriz
-        imwrite(ImagenNIConRuido,strcat(pathWriteNoise,'\BlurredImage (',int2str(i),').jpg')); %Genero la imagen i
+        ImagenNIConRuidoColumna=C(:,i); % Read column i of C
+        ImagenNIConRuido=reshape(ImagenNIConRuidoColumna,[m n]); % Convert it into a matrix
+        imwrite(ImagenNIConRuido,strcat(pathWriteNoise,'\BlurredImage (',int2str(i),').jpg')); % Generate image i
     end;
 end

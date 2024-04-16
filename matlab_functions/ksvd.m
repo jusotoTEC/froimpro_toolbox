@@ -1,36 +1,33 @@
 function [D,X,Err]=ksvd(TextPath,r,c,varargin)    
-    % El método K-SVD aproxima las matrices D y X del problema 
-    % min ||Y-DX||, donde ||X(:,i)||_0<=c, donde Y es tamaño mxn, D de
-    % tamaño mxr y X es de tamaño rxn. Además, c es una constante de
-    % esparcidad de las columnas, la cual debe cumplir 1<=c<=m. 
-    % La matriz D se denomina "diccionario".
-    %
-    % Para más información ver el manual del Toolbox en <a href="matlab: 
-    % web('https://tecnube1-my.sharepoint.com/:b:/g/personal/jfallas_itcr_ac_cr/ES65Im0jm15AvNH9XtsS8uwBvzdPE-U8CHa11fWpLCZGRw?e=fLPthq')"> Manual del Toolbox norma de Frobenius</a>.
-    %   
-    % Sintaxis de la función: [D,X,Err]=ksvd('TextPath',r,c)    
-    %
-    % Parámetros de entrada: 
-    %       TextPath: Ruta de la carpeta con las imágenes de entrenamiento
-    %       r:        Número de columnas del diccionario (se le conoce como número de átomos)
-    %       c:        Constante de esparcidad
-    %
-    % Sintaxis alternativa: [D,X,Err]=ksvd('TextPath',r,c,'Extension','.ext','IteraMax',IteraMax,'Tol',Tol) 
-    %
-    % Sobre los parámetros opcionales:
-    %       Extension: Las extensiones que se aceptan son jpg, pgm, png, tif, bpm. 
-    %                  El valor por defecto es .jpg
-    %       IteraMax:  Número máximo de iteraciones a realizar. El valor por
-    %                  defecto es 200.
-    %       Tol:       Tolerancia, para el método de paro, diferencia entre dos errores
-    %                  consecutivos menor que Tol. EL valor por defecto es 10^-3.
-    %
-    % Parámetros de salida
-    %       D:     Matriz diccionario de tamaño mxr
-    %       X:     Matriz esparcida de tamaño rxn
-    %       Err: Error relativo normalizado del método
-    %
-    Extension='.jpg'; %%%%%% Validaciones
+% The K-SVD method approximates the matrices D and X of the problem
+% min ||Y-DX||, where ||X(:,i)||_0<=c, where Y is of size mxn, D is of
+% size mxr, and X is of size rxn. Additionally, c is a sparsity constant
+% that must satisfy 1<=c<=m. The matrix D is called the "dictionary".
+
+% For more information, see the Toolbox manual.
+%
+% Function syntax: [D,X,Err] = ksvd('TextPath',r,c)
+
+% Input parameters:
+%       TextPath: Path of the folder with training images
+%       r:        Number of columns in the dictionary (known as the number of atoms)
+%       c:        Sparsity constant
+
+% Alternative syntax: [D,X,Err] = ksvd('TextPath',r,c,'Extension','.ext','IteraMax',IteraMax,'Tol',Tol) 
+
+% Optional parameters:
+%       Extension: Accepted extensions are jpg, pgm, png, tif, bpm. 
+%                  The default value is .jpg
+%       IteraMax:  Maximum number of iterations. Default value is 200.
+%       Tol:       Tolerance for the stopping method, difference between two consecutive errors
+%                  less than Tol. Default value is 10^-3.
+
+% Output parameters:
+%       D:     Dictionary matrix of size mxr
+%       X:     Sparse matrix of size rxn
+%       Err:   Normalized relative error of the method
+
+    Extension='.jpg'; %%%%%% Validations
     expectedExtensions = {'.jpg','.pgm','.bmp','.png','.tif'};
     defaultIteraMax=200;
     defaultTol=10^-3;
@@ -54,7 +51,7 @@ function [D,X,Err]=ksvd(TextPath,r,c,varargin)
     Extension=lower(strrep(Extension,' ',''));
     
     %
-    % Referencia:  M. Aharon, M. Elad and A. Bruckstein, "K-SVD: An algorithm for designing overcomplete dictionaries for sparse representation," 
+    % Reference:  M. Aharon, M. Elad and A. Bruckstein, "K-SVD: An algorithm for designing overcomplete dictionaries for sparse representation," 
     %              in IEEE Transactions on Signal Processing, vol. 54, no. 11, pp. 4311-4322, Nov. 2006, doi: 10.1109/TSP.2006.881199.
     %
     Y=imgs2blocks(TextPath,Extension);
@@ -87,7 +84,7 @@ function [D,X,Err]=ksvd(TextPath,r,c,varargin)
 end
 
 function X = sparce_matrix(Y, D0,c)
-    %Calcula la matriz de esparcidad X
+    % Calculate the sparsity matrix X
 
     N=size(Y,2); K=size(D0,2);    
     X=zeros(K,N);
@@ -99,7 +96,7 @@ end
 
 
 function x=OMP(y,A,k)
-    %Algoritmo "Orthogonal Matching Pursuit"
+    %"Orthogonal Matching Pursuit" Algorithm
     [~,n]=size(A); r=y; T=[];    
     x=zeros(n,1);
     for i=1:k
@@ -115,7 +112,7 @@ function x=OMP(y,A,k)
     end    
 end
 
-%Funciones Auxiliares del Algoritmo OMP
+% Auxiliary functions of the OMP Algorithm
 
 function t=argmax_OMP(g,A)
     x=[]; n=size(A,2);    
