@@ -30,7 +30,7 @@ This repository contains the following information:
 
 The *FroImPro Toolbox* was presented at the *47th International Conference on Telecommunications and Signal Processing* through the scientific paper *FroImPro: A MATLAB Toolbox for Image Processing Based on the Frobenius Norm*.
 
-The paper was presented in the https://doi.org/10.1109/TSP63128.2024.10605921
+The link of the paper is https://doi.org/10.1109/TSP63128.2024.10605921
 
 ## Authors
 
