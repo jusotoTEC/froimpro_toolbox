@@ -28,7 +28,7 @@ This repository contains the following information:
 
 * File *Manual_FroImPro_Español.pdf*  provides a manual in Spanish explaining how to use every function of the *FroImPro Toolbox*.
 
-The *FroImPro Toolbox* was presented at the *47th International Conference on Telecommunications and Signal Processing* through the scientific paper *FroImPro: A MATLAB Toolbox for Image Processing Based on the Frobenius Norm*. The paper is available at https://doi.org/10.1109/TSP63128.2024.10605921
+The *FroImPro Toolbox* was presented at the **47th International Conference on Telecommunications and Signal Processing** through the scientific paper *FroImPro: A MATLAB Toolbox for Image Processing Based on the Frobenius Norm*. The paper is available at https://doi.org/10.1109/TSP63128.2024.10605921
 
 ## Authors
 
